@@ -2,11 +2,12 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "cake.jpg",
+      "filename" : "feed.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
+      "filename" : "feed-small.png",
       "scale" : "2x"
     },
     {

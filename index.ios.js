@@ -1,20 +1,55 @@
 
 import React, { Component } from 'react';
-import { AppRegistry, StyleSheet, Text, View, Image } from 'react-native';
+import { AppRegistry, StyleSheet, Text, View, Image, ActivityIndicatorIOS } from 'react-native';
 
 import Login from './Login';
+import AppContainer from './AppContainer';
+import AuthService from './AuthService';
 
-class finder extends Component {
-  render() {
-    return (
-      <View style={styles.container}>
-        <Login />
-      </View>
-    );
+var finder = React.createClass({
+  componentDidMount: function () {
+    AuthService.getAuthInfo((err, authInfo)=> {
+      this.setState({
+        checkingAuth: false,
+        isLoggedIn: authInfo != null
+      })
+    });
+  },
+
+  render: function () {
+    if(this.state.checkingAuth){
+      return (
+        <View style={styles.container}>
+          <ActivityIndicatorIOS
+            animating={true}
+            size="large"
+            style={styles.loader} />
+        </View>
+      )
+    }
+
+    if(this.state.isLoggedIn){
+      return (
+        <AppContainer/>
+      )
+    }else{
+      return (
+        <Login onLogin={this.onLogin}/>
+      );
+    }
+  },
+  onLogin: function() {
+    this.setState({isLoggedIn: true})
+  },
+  getInitialState: function() {
+    return {
+      isLoggedIn: false,
+      checkingAuth: true
+    }
   }
-}
+});
 
-const styles = StyleSheet.create({
+var styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
