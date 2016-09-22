@@ -1,7 +1,7 @@
 'use strict';
 
 import React, { Component } from 'react';
-import { Text, View, StyleSheet, Image, TextInput, TouchableHighlight, ActivityIndicator } from 'react-native';
+import { Text, View, StyleSheet, TextInput, TouchableHighlight, ActivityIndicator } from 'react-native';
 
 class Login extends Component {
   constructor(props) {
@@ -37,8 +37,8 @@ class Login extends Component {
     let errorCtrl = <View />;
     if(!this.state.success && this.state.badCredentials) {
       errorCtrl = <Text style={styles.error}>
-                  Invalid Username Or Password!
-                  </Text>
+        Invalid Username Or Password!
+      </Text>
     }
     if(!this.state.success && this.state.unknownError) {
       errorCtrl = <Text style={styles.error}>
@@ -55,19 +55,19 @@ class Login extends Component {
                    style={styles.input}
                    placeholder='Username'/>
         <TextInput onChangeText={(text) => this.setState({password: text})}
-                  style={styles.input}
+                   style={styles.input}
                    placeholder='Password'
-                    secureTextEntry={true}/>
+                   secureTextEntry={true}/>
         <TouchableHighlight style={styles.button} onPress={this.onLoginPressed.bind(this)}>
           <Text style={styles.buttonText}>Sign In</Text>
         </TouchableHighlight>
         {errorCtrl}
         <ActivityIndicator style={styles.loader}
-                              animating={this.state.showProgress}
-                              size='large'/>
+                           animating={this.state.showProgress}
+                           size='large'/>
 
 
-        </View>
+      </View>
     );
   }
 };
@@ -75,7 +75,7 @@ class Login extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: 40,
+    paddingTop: 100,
     alignItems: 'center'
   },
   logo: {

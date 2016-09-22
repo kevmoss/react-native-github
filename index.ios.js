@@ -55,7 +55,6 @@ var styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#F5FCFF',
-    padding: 40
   },
   welcome: {
     fontSize: 20,

@@ -4,7 +4,8 @@ import React, { Component } from 'react';
 import { Text, View, ListView, ActivityIndicator, Image, TouchableHighlight } from 'react-native';
 
 import moment from 'moment';
-import PushPayload from './PushPayload';
+
+var PushPayload = require('./PushPayload');
 
 class Feed extends Component {
   constructor(props) {
@@ -69,7 +70,8 @@ class Feed extends Component {
           padding: 20,
           alignItems: 'center',
           borderColor: '#D7D7D7',
-          borderBottomWidth: 1
+          borderBottomWidth: 1,
+          backgroundColor: '#fff'
         }}>
           <Image
             source={{uri: rowData.actor.avatar_url}}

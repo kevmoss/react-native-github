@@ -1,7 +1,9 @@
 'use strict';
 
 import React, { Component } from 'react';
-import { Text, View, ListView, Image } from 'react-native';
+import { Text, View, ListView, Image, StyleSheet } from 'react-native';
+
+import moment from 'moment';
 
 class PushPayload extends Component {
   constructor(props) {
@@ -12,11 +14,27 @@ class PushPayload extends Component {
     });
 
     this.state = {
-      dataSource: ds
+      dataSource: ds.cloneWithRows(props.pushEvent.payload.commits),
+      pushEvent: props.pushEvent
     };
   }
 
-
+  renderRow(rowData){
+    return(
+      <View style={{
+        flex: 1,
+        justifyContent: 'center',
+        borderColor:'#D7D7D7',
+        borderBottomWidth: 1,
+        borderTopWidth: 1,
+        paddingTop:20,
+        paddingBottom:20,
+        padding: 10
+      }}>
+        <Text><Text style={styles.bold}>{rowData.sha.substring(0, 6)}</Text> - {rowData.message}</Text>
+      </View>
+    );
+  }
 
   render() {
     return (
@@ -26,12 +44,50 @@ class PushPayload extends Component {
         justifyContent: 'flex-start',
         alignItems: 'center'
       }}>
-        <Text>Hello there!</Text>
-      </View>
+        <Image
+           source={{uri: this.state.pushEvent.actor.avatar_url}}
+           style={{
+              height: 120,
+              width: 120,
+              borderRadius: 60
+        }}
+        />
 
+        <Text style={{
+          paddingTop: 20,
+          paddingBottom: 20,
+          fontSize: 20
+        }}>
+          {moment(this.state.pushEvent.created_at).fromNow()}
+        </Text>
+
+        <Text><Text style={styles.bold}>{this.state.pushEvent.actor.login}</Text></Text>
+        <Text><Text style={styles.bold}>{this.state.pushEvent.payload.ref.replace('refs/heads/', '')}</Text></Text>
+        <Text><Text style={styles.bold}>at {this.state.pushEvent.repo.name}</Text></Text>
+
+        <Text style={{
+          paddingTop: 40,
+          fontSize: 20
+        }}>
+          {this.state.pushEvent.payload.commits.length} Commits
+        </Text>
+
+        <ListView
+            contentInset={{
+              top: -50
+            }}
+          dataSource={this.state.dataSource}
+          renderRow={this.renderRow.bind(this)} />
+      </View>
     );
   }
 }
 
+var styles = StyleSheet.create({
+  bold: {
+    fontWeight: '800',
+    fontSize: 16
+  }
+});
 
 module.exports = PushPayload;

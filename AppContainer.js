@@ -4,7 +4,7 @@ import React, { Component } from 'react';
 import { Text, View, StyleSheet, TabBarIOS, NavigatorIOS } from 'react-native';
 
 var Feed = require('./Feed');
-
+var Search = require('./Search');
 
 class AppContainer extends Component {
   constructor(props) {
@@ -40,7 +40,14 @@ class AppContainer extends Component {
           icon={require('image!search-small')}
           onPress={()=> this.setState({selectedTab: 'search'})}
         >
-          <Text style={styles.welcome}>Tab 2</Text>
+          <NavigatorIOS
+            style={{
+              flex: 1
+            }}
+            initialRoute={{
+              component: Search,
+              title: 'Search'
+            }} />
         </TabBarIOS.Item>
       </TabBarIOS>
     )
