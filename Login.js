@@ -1,7 +1,7 @@
 'use strict';
 
 import React, { Component } from 'react';
-import { Text, View, StyleSheet, Image, TextInput, TouchableHighlight, ActivityIndicatorIOS } from 'react-native';
+import { Text, View, StyleSheet, Image, TextInput, TouchableHighlight, ActivityIndicator } from 'react-native';
 
 class Login extends Component {
   constructor(props) {
@@ -57,12 +57,12 @@ class Login extends Component {
         <TextInput onChangeText={(text) => this.setState({password: text})}
                   style={styles.input}
                    placeholder='Password'
-                    secureTextEntry='true'/>
+                    secureTextEntry={true}/>
         <TouchableHighlight style={styles.button} onPress={this.onLoginPressed.bind(this)}>
           <Text style={styles.buttonText}>Sign In</Text>
         </TouchableHighlight>
         {errorCtrl}
-        <ActivityIndicatorIOS style={styles.loader}
+        <ActivityIndicator style={styles.loader}
                               animating={this.state.showProgress}
                               size='large'/>
 

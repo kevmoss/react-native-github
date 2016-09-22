@@ -1,6 +1,6 @@
 
 import React, { Component } from 'react';
-import { AppRegistry, StyleSheet, Text, View, Image, ActivityIndicatorIOS } from 'react-native';
+import { AppRegistry, StyleSheet, Text, View, Image, ActivityIndicator } from 'react-native';
 
 import Login from './Login';
 import AppContainer from './AppContainer';
@@ -20,7 +20,7 @@ var finder = React.createClass({
     if(this.state.checkingAuth){
       return (
         <View style={styles.container}>
-          <ActivityIndicatorIOS
+          <ActivityIndicator
             animating={true}
             size="large"
             style={styles.loader} />

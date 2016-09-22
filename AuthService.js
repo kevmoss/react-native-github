@@ -1,6 +1,6 @@
-var buffer = require ('buffer');
-var AsyncStorage = require('react-native').AsyncStorage;
-var _ = require('lodash');
+import { AsyncStorage } from 'react-native';
+import buffer from 'buffer';
+import _ from 'lodash';
 
 const authKey = 'auth';
 const userKey = 'user';
@@ -15,18 +15,18 @@ class AuthService {
         return cb();
       }
 
-      var zippedObj = _.zipObject(val);
+      var fromPairs = _.fromPairs(val);
 
-      if(!zippedObj[authKey]){
+      if(!fromPairs[authKey]){
         return cb();
       }
 
       var authInfo = {
         header: {
-          Authorization: 'Basic ' + zippedObj[authKey]
+          Authorization: 'Basic ' + fromPairs[authKey]
         },
-        user: JSON.parse(zippedObj[userKey])
-      }
+        user: JSON.parse(fromPairs[userKey])
+      };
 
       return cb(null, authInfo);
     });

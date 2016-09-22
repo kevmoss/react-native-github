@@ -1,7 +1,7 @@
 'use strict';
 
 import React, { Component } from 'react';
-import { Text, View, StyleSheet, TabBarIOS } from 'react-native';
+import { Text, View, StyleSheet, TabBarIOS, NavigatorIOS } from 'react-native';
 
 var Feed = require('./Feed');
 
@@ -25,7 +25,14 @@ class AppContainer extends Component {
           icon={require('image!feed-small')}
           onPress={()=> this.setState({selectedTab: 'feed'})}
         >
-          <Feed />
+          <NavigatorIOS
+          style={{
+            flex: 1
+          }}
+          initialRoute={{
+            component: Feed,
+            title: 'Feed'
+          }} />
         </TabBarIOS.Item>
         <TabBarIOS.Item
           title="Search"
